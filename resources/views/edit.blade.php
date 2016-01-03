@@ -88,7 +88,18 @@
                     },
                     eventMouseover: function() {
                         $(this).css({'cursor': 'pointer'});
-                    }               
+                    },
+                    customButtons: {
+                        home: {
+                            text: 'Home',
+                            click: function() {
+                                location.href = '/';
+                            }
+                        }
+                    },
+                    header: {
+                        right: 'home today prev,next',
+                    }                                 
                 });
 
                 $('#display-start, #display-end').datepicker({

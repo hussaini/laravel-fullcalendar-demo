@@ -28,13 +28,24 @@
                     },
                     eventMouseover: function() {
                         $(this).css({'cursor': 'pointer'});
-                    }               
+                    },
+                    customButtons: {
+                        editEvent: {
+                            text: 'Edit Event',
+                            click: function() {
+                                location.href = '/edit';
+                            }
+                        }
+                    },
+                    header: {
+                        right: 'editEvent today prev,next',
+                    }                            
                 });
             });
         </script>                
     </head>
     <body>
-        <div class="container">        
+        <div class="container">
             <div id="calendar"></div>
         </div>
         <div class="modal fade" id="modalCalendar" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
