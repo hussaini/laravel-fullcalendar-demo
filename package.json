@@ -6,9 +6,5 @@
   "dependencies": {
     "laravel-elixir": "^3.0.0",
     "bootstrap-sass": "^3.0.0",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
-    "react-redux": "^4.4.5",
-    "redux": "^3.5.2"
   }
 }
