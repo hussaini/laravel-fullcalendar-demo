@@ -18,23 +18,3 @@ Route::get('/', function () {
 Route::get('edit', function() {
     return view('edit');
 });
-
-Route::group(['prefix' => 'api'], function() {
-    Route::group(['prefix' => 'events'], function() {
-
-        Route::get('all', 'EventsController@getEvents');
-        Route::get('get', 'EventsController@getEvent');
-        Route::post('set', 'EventsController@setEvent');
-        Route::post('delete', 'EventsController@deleteEvent');
-
-        Route::get('echo', function() {
-            return json_encode(['ping' => true]);
-        });
-
-        Route::post('echo', function() {
-            $input = Input::all();
-            $input['id'] = 1375;
-            return json_encode($input);
-        });
-    });
-});

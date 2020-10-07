@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Event;
 use Illuminate\Database\Seeder;
 
 class EventTableSeeder extends Seeder
@@ -13,17 +14,9 @@ class EventTableSeeder extends Seeder
      */
     public function run()
     {
-    	// clean table 'events'
-        DB::table('events')->delete();
- 
- 		// specify the value to be insert to table 'events'
-        $events = array(
-            ['title' => 'New Year', 'details' => '', 'start' => '2016-01-01', 'end' => '', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['title' => 'Image example', 'details' => '<img src="http://memesvault.com/wp-content/uploads/You-Mad-Bro-Meme-Face-01.jpg"></img>', 'start' => '2016-01-15', 'end' => '2016-01-15', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['title' => 'Vacation Week', 'details' => '<strong>Lonnggggg</strong> holiday', 'start' => '2016-01-25', 'end' => '2016-01-29', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-        );
-
-		// insert data into table 'events' 
-        DB::table('events')->insert($events);
+        Event::updateOrCreate(['title' => 'New Year', 'details' => '', 'start_at' => '2020-01-01'], []);
+        Event::updateOrCreate(['title' => 'Image example', 'details' => '<img src="http://memesvault.com/wp-content/uploads/You-Mad-Bro-Meme-Face-01.jpg"></img>', 'start_at' => '2020-10-15', 'end_at' => '2020-10-15'], []);
+        Event::updateOrCreate(['title' => 'Vacation Week', 'details' => '<strong>Lonnggggg</strong> holiday', 'start_at' => '2020-10-25', 'end_at' => '2020-10-29'], []);
+        Event::updateOrCreate(['title' => 'Overlap month', 'details' => 'Test overlap', 'start_at' => '2020-11-05', 'end_at' => '2020-11-15'], []);
     }
 }
