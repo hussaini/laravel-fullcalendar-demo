@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const calendar = new Calendar(calendarEl, {
         plugins: [ dayGridPlugin, interactionPlugin, bootstrapPlugin ],
+        aspectRatio: 1.6,
         themeSystem: 'bootstrap',
         events: '/api/events',
         eventClick: (info, jsEvent, view) => {
