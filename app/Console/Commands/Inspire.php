@@ -24,10 +24,12 @@ class Inspire extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return int
      */
     public function handle()
     {
         $this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
+
+        return 0;
     }
 }
