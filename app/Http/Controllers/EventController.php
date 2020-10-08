@@ -11,14 +11,17 @@ class EventController extends Controller
 {
     public function index()
     {
-        $start_at = new Carbon(request()->query('start'));
-        $end_at = new Carbon(request()->query('end'));
+        $events = Event::query();
 
-        $events = Event::where('start_at', '>=', $start_at->timestamp)
-            ->where('start_at', '<=', $end_at->timestamp)
-            ->get();
+        if ($start = request('start', null)) {
+            $events->where('start_at', '>=', (new Carbon($start))->timestamp);
+        }
 
-        return new EventCollection($events);
+        if ($end = request('end', null)) {
+            $events->where('start_at', '<=', (new Carbon($end))->timestamp);
+        }
+
+        return new EventCollection($events->get());
     }
 
     public function show(Event $event)
