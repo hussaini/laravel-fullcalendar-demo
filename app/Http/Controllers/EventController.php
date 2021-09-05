@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventFormRequest;
 use App\Http\Resources\EventCollection;
+use App\Http\Resources\Event as EventResource;
 use App\Models\Event;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,21 +28,20 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
-        return response()->json($event);
+        return response($event);
     }
 
-    public function store()
+    public function store(EventFormRequest $request)
     {
-        Event::create(request()->all());
-
-        return response()->setStatusCode(Response::HTTP_CREATED);
+        return EventResource::make(Event::create($request->validated()))
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function update(Event $event)
+    public function update(EventFormRequest $request, Event $event)
     {
-        $event->update(request()->all());
-
-        return response()->noContent();
+        $event->update($request->validated());
+        return EventResource::make($event);
     }
 
     public function destroy(Event $event)
