@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSave = 'btnSave'
     const btnDel = 'btnDel'
     const modalCalendar = 'modalCalendar'
+    const baseUri = '/api/events'
 
     const datePickerOptions = {
         uiLibrary: 'bootstrap4',
@@ -38,7 +39,32 @@ document.addEventListener('DOMContentLoaded', () => {
         displayEventTime: false,
         weekNumberCalculation: 'ISO',
         themeSystem: 'bootstrap',
-        events: '/api/events',
+        events: (info, success, failure) => {
+            console.log(info)
+            Axios({
+                method: 'get',
+                url: baseUri,
+                params: {
+                    startAt: info.startStr,
+                    endAt: info.endStr,
+                }
+            }).then((response) => {
+                const events = response.data
+
+                success(events.map((event) => {
+                    return {
+                        id: event.id,
+                        title: event.title,
+                        details: event.details,
+                        start: event.startAt,
+                        end: event.endAt,
+                        allDay: event.allDay,
+                    }
+                }))
+            }).catch((error) => {
+                failure()
+            })
+        },
         eventClick: (info, jsEvent, view) => {
             $(`#${inputId}`).val(info.event.id)
             $(`#${inputTitle}`).val(info.event.title)
@@ -93,12 +119,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const responseData = response.data
 
             if (method === 'post') {
-                calendar.addEvent(responseData)
+                const inputEvent = Object.assign(responseData, {
+                    start: responseData.startAt,
+                    end: responseData.endAt,
+                })
+                calendar.addEvent(inputEvent)
             } else if (method === 'patch') {
                 const event = calendar.getEventById(responseData.id)
 
-                event.setDates(responseData.start, responseData.end === responseData.start ? null : responseData.end, {
-                    allDay: event.allDay,
+                event.setDates(responseData.startAt, responseData.endAt === responseData.startAt ? null : responseData.endAt, {
+                    allDay: responseData.allDay,
                 })
                 event.setProp('title', responseData.title)
                 event.setExtendedProp('details', responseData.details)

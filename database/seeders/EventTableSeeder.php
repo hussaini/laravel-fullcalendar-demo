@@ -14,9 +14,9 @@ class EventTableSeeder extends Seeder
      */
     public function run()
     {
-        Event::updateOrCreate(['title' => 'New Year', 'details' => '', 'start_at' => '2020-01-01'], []);
-        Event::updateOrCreate(['title' => 'Image example', 'details' => '<img src="http://memesvault.com/wp-content/uploads/You-Mad-Bro-Meme-Face-01.jpg"></img>', 'start_at' => '2020-10-15', 'end_at' => '2020-10-15'], []);
-        Event::updateOrCreate(['title' => 'Vacation Week', 'details' => '<strong>Lonnggggg</strong> holiday', 'start_at' => '2020-10-25', 'end_at' => '2020-10-29'], []);
-        Event::updateOrCreate(['title' => 'Overlap month', 'details' => 'Test overlap', 'start_at' => '2020-11-05', 'end_at' => '2020-11-15'], []);
+        Event::firstOrCreate(['title' => 'New Year', 'details' => '', 'start_at' => '2020-01-01'], []);
+        Event::firstOrCreate(['title' => 'Mid month', 'details' => '', 'start_at' => '2020-01-15', 'end_at' => '2020-01-15'], []);
+        Event::firstOrCreate(['title' => 'Long Week', 'details' => '<strong>Lonnggggg</strong> week', 'start_at' => '2020-01-20', 'end_at' => '2020-01-25'], []);
+        Event::firstOrCreate(['title' => 'Overlap month', 'details' => 'Test overlap', 'start_at' => '2020-01-30', 'end_at' => '2020-02-03'], []);
     }
 }

@@ -15,12 +15,12 @@ class EventController extends Controller
     {
         $events = Event::query();
 
-        if ($start = request('start', null)) {
-            $events->where('start_at', '>=', (new Carbon($start))->timestamp);
+        if ($startAt = request('startAt')) {
+            $events->where('start_at', '>=', (new Carbon($startAt))->timestamp);
         }
 
-        if ($end = request('end', null)) {
-            $events->where('start_at', '<=', (new Carbon($end))->timestamp);
+        if ($endAt = request('endAt')) {
+            $events->where('start_at', '<=', (new Carbon($endAt))->timestamp);
         }
 
         return new EventCollection($events->get());
