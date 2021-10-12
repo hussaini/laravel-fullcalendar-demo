@@ -18,7 +18,8 @@
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3",
-        "barryvdh/laravel-ide-helper": "^2.8"
+        "barryvdh/laravel-ide-helper": "^2.8",
+        "laravel/dusk": "^6.18"
     },
     "autoload": {
         "classmap": [
